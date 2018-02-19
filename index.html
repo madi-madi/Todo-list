@@ -1,0 +1,64 @@
+<script type="text/javascript" src="vue.js"></script>
+<link href="https://unpkg.com/todomvc-app-css@2.1.0/index.css" rel="stylesheet"/>
+<link rel="icon" href="forsanicon.png"  type="image/png"/>
+<!--<link rel="stylesheet" type="text/css" href="todo.css">-->
+<style type="text/css">
+  figure {
+    margin: 0;
+    padding-top: 10px;
+    background-color: #f7f7f7;
+    border-top: 3px solid;
+}
+
+figure img {
+    width: 30%;
+    max-height: 300px;
+    text-align: center;
+    margin: 0 auto;
+    display: inherit;
+    border-radius: 50%;
+}
+</style>
+
+<section class="todoapp" title=" Forsan Technology by Ibrahim Madi">
+  <header class="header">
+    <h1>Todo List</h1>
+    <input class="new-todo"
+      autocomplete="off"
+      v-model="newTodo"
+      @keyup.enter="addTodo"
+      placeholder="What needs to be done?">
+  </header>
+  <section class="main" >
+    <input class="toggle-all" id="toggle-all" type="checkbox" v-model="allDone">
+    <label for="toggle-all">Mark all as complete</label>
+    
+    <ul class="todo-list">
+      <li class="todo" v-for="todo in filterTodos" :class="{completed:todo.completed, editing:todo== editingTodo}">
+        <div class="view">
+          <input class="toggle" type="checkbox" v-model="todo.completed">
+          <label @dblclick="editTodo(todo)">{{todo.title}}</label>
+          <button class="destroy" @click="deleteTodo(todo)"></button>
+        </div>
+        <input class="edit" type="text" v-model="todo.title" @keyup.enter="doneEditing" @keyup.esc="cancleEditing">
+      </li>
+    </ul>
+  </section>
+    <footer class="footer">
+    <span class="todo-count">
+      <strong>{{reaminingTodoAll}}</strong> {{reaminingTodoText}} left
+    </span>
+    <ul class="filters">
+      <li><a href="#" @click.prevent="visible = 'all'" :class="{selected : visible=='all'}">All</a></li>
+      <li><a href="#"  @click.prevent="visible = 'active'" :class="{selected: visible=='active'}">Active - {{reaminingTodoActive}}</a></li>
+      <li><a href="#" @click.prevent="visible = 'completed'" :class="{selected : visible== 'completed'}">Completed - {{reaminingTodoCompleted}}</a></li>
+    </ul>
+    <button class="clear-completed" @click="removeCompleted">
+      Clear completed
+    </button>
+  </footer>
+</section>
+  <figure>
+    <img src="forsanicon.png" title="Forsan Technology">
+  </figure>
+    <script type="text/javascript" src="main.js"></script>
